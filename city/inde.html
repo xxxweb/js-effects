@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+
+		<style type="text/css">
+			form {
+				margin: 100 auto;
+			}
+			
+			form select {
+				width: 200px;
+				height: 50px;
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<form action="">
+			<select name="country">
+				<option value="">==国家==</option>
+			</select>
+			<select name="province">
+				<option value="">==省==</option>
+			</select>
+			<select name="city">
+				<option value="">==城市==</option>
+			</select>
+			<input type="button" name="submit" value="提交" />
+		</form>
+
+		<script src="area_chs.js"></script>
+
+		<script>
+			var areaObj = [];
+
+			function initLocation(e) {
+				var a = 0;
+				for(var m in e) {
+					areaObj[a] = e[m];
+					a++;
+				}
+			}
+		</script>
+
+		<script src="location_chs.js"></script>
+
+		<script type="text/javascript">
+			var form = document.forms[0];
+			var country = form.country;
+			var province = form.province;
+			var city = form.city;
+			var btn = form.submit;
+
+			(function setCountry() {
+				//				_areaList
+
+				var countryChild = "<option>==国家==</option>";
+				for(var i = 0; i < _areaList.length; i++) {
+					countryChild += "<option a=" + (i + 1) + " value='" + _areaList[i] + "'>" + _areaList[i] + "</option>";
+
+				}
+				country.innerHTML = countryChild;
+
+			})();
+			setProvince();
+
+			function setProvince() {
+
+				country.onchange = function() {
+
+					var whereCountry = 0;
+
+					city.innerHTML = '<option>==城市==</option>';
+
+					var op = this.getElementsByTagName('option');
+					for(var i = 0; i < op.length; i++) {
+
+						if(op[i].value == this.value) {
+							whereCountry = op[i].getAttribute('a');
+
+						}
+					}
+
+					var provinceChild = '<option>==省份==</option>';
+
+					var provinceData = areaObj[whereCountry];
+
+					var provinceId = 0;
+
+					for(var key in provinceData) {
+
+						p = provinceData[key];
+
+						if(p.n) {
+							provinceChild += "<option b='" + key + "' value='" + p.n + "'>" + p.n + "</option>";
+							setCity(provinceData);
+							province.innerHTML = provinceChild;
+						} else {
+
+							var xxx = '<option>==城市==</option>';
+							for(var index in p) {
+								if(p[index].n) {
+									var option = document.createElement("option");
+									option.innerHTML = p[index].n;
+									form.city.appendChild(option);
+								}
+							}
+
+						}
+					}
+
+				}
+			};
+
+			function setCity(data) {
+
+				province.onchange = function() {
+
+					var proValue = this.value;
+
+					var cityId = 0;
+					var op = this.getElementsByTagName('option');
+
+					for(var i = 0; i < op.length; i++) {
+
+						if(op[i].value == proValue) {
+							cityId = op[i].getAttribute('b');
+
+						}
+					}
+
+					var citys = data[cityId];
+					var cityInner = '<option>==城市==</option>';
+
+					for(var i in citys) {
+						if(citys[i].n) {
+							cityInner += "<option>" + citys[i].n + "</option>";
+						}
+					}
+
+					city.innerHTML = cityInner;
+					btn.onclick = function() {
+						alert(country.value + " || " + province.value + " || " + city.value);
+
+					}
+
+				}
+			};
+		</script>
+
+	</body>
+
+</html>

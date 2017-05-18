@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			#box {
+				width: 300px;
+				height: 300px;
+				border: 1px solid #000000;
+				margin: 100px auto;
+				border-radius: 50%;
+				overflow: hidden;
+				
+				
+				animation: 4000ms rotate infinite linear;
+			}
+			
+			#box .left {
+				position: relative;
+				float: left;
+				width: 150px;
+				height: 302px;
+				background: #000000;
+				z-index: 1;
+			}
+			
+			#box .right {
+				position: relative;
+				float: left;
+				width: 150px;
+				height: 304px;
+				background: #FFFFFF;
+			}
+			
+			#box .left .heiyuan {
+				position: absolute;
+				width: 152px;
+				height: 152px;
+				background: #000000;
+				border-radius: 50%;
+				left: 75px;
+				top: 0;
+				z-index: 2;
+			}
+			
+			#box .left .xs-baiyuan {
+				position: absolute;
+				width: 38px;
+				height: 38px;
+				background: #FFFFFF;
+				border-radius: 50%;
+				left: 131px;
+				top: 57px;
+				z-index: 3;
+			}
+			
+			#box .right .baiyuan {
+				position: absolute;
+				width: 152px;
+				height: 152px;
+				background: #FFFFFF;
+				border-radius: 50%;
+				bottom: 0;
+				left: -76px;
+				z-index: 4;
+			}
+			
+			#box .right .xs-heiyuan {
+				position: absolute;
+				width: 38px;
+				height: 38px;
+				border-radius: 50%;
+				background: #000000;
+				z-index: 5;
+				bottom: 57px;
+				left: -19px;
+			}
+			
+			@keyframes  rotate{
+				from{}
+				to{transform: rotate(360deg);}
+			}
+		</style>
+
+	</head>
+
+	<body>
+		<div id="box">
+			<div class="left">
+				<div class="heiyuan"></div>
+				<div class="xs-baiyuan"></div>
+			</div>
+			<div class="right">
+				<div class="baiyuan"></div>
+				<div class="xs-heiyuan"></div>
+			</div>
+		</div>
+
+	</body>
+
+</html>

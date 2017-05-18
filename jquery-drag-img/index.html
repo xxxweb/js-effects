@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			body {
+				background-color: #66677c;
+			}
+			
+			#box {
+				position: relative;
+				width: 120px;
+				height: 180px;
+				margin: 200px auto;
+				
+				transform-style: preserve-3d;
+				
+				transform:  perspective(1000px) rotateX(-20deg);
+				
+	
+			}
+			
+			#box img {
+				vertical-align: top;
+				width: 120px;
+				height: 180px;
+				position: absolute;
+				
+			}
+			
+			#box div {
+				width: 1200px;
+				height: 1200px;
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				margin-left: -600px;
+				margin-top: -600px;
+				transform: rotateX(90deg);
+				border-radius: 50%;
+				/*background: radial-gradient( center center ,600px 600px,#ffffff ,transparent,0);*/
+				background: radial-gradient(#ffffff 0%, transparent 50%);
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="box">
+			<img src="1.jpg" alt="" />
+			<img src="2.jpg" alt="" />
+			<img src="3.jpg" alt="" />
+			<img src="4.jpg" alt="" />
+			<img src="5.jpg" alt="" />
+			<img src="6.jpg" alt="" />
+			<img src="7.jpg" alt="" />
+			<img src="8.jpg" alt="" />
+			<img src="9.jpg" alt="" />
+			<img src="10.jpg" alt="" />
+			<div></div>
+		</div>
+
+		<script src="jquery.min.js"></script>
+		<script type="text/javascript">
+			var imgNum = 10;
+			var deg = 360 / imgNum;
+
+			$('#box img').each(function(i) {
+				$(this).css({
+					transform: 'rotateY(' + (i * deg) + 'deg) translateZ(300px)'
+
+				});
+
+			});
+
+			var downX = 0;
+			var downY = 0;
+			var transX = 0;
+			var transY = -20;
+			var play = null;
+			$(document).on('mousedown', function(ev) {
+
+				downX = ev.clientX;
+
+				downY = ev.clientY;
+				ev.preventDefault();
+
+				$(document).on('mousemove', function(ev) {
+					var mouseX = ev.clientX;
+					var mouseY = ev.clientY;
+
+					clearInterval(play);
+
+					var disX = mouseX - downX;
+					var disY = mouseY - downY;
+
+					var obj = $('#box');
+
+					transX += disX*0.1;
+					transY -= disY*0.2;
+
+					console.log(transX);
+
+					obj.css({
+						
+						transform: " rotateY(" + transX + "deg) rotateX(" + transY + "deg)"
+
+					});
+
+					downX = mouseX;
+					downY = mouseY;
+
+				});
+
+				$(document).on('mouseup', function(ev) {
+					$(document).off('mousemove');
+				})
+			});
+		</script>
+	</body>
+
+</html>

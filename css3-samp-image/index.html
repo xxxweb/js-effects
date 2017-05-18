@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: gray;
+			}
+			.wraper{
+				position: relative;            
+			}
+			img{
+				position: absolute;
+				width: 240px;
+				height: 160px;
+				padding: 10px;
+				background:radial-gradient( transparent 0px,transparent 4px,white 4px,white) ;
+				background-size:20px 20px ;
+				background-position:-10px -10px ;
+				
+				box-shadow: 10px 10px 10px #000000;
+			}
+			
+			img:hover{
+				transition: 1.5s all;
+				 transform: scale(2);
+				 z-index: 9999;
+				 box-shadow: 20px 20px 5px #000000;
+				 
+				 border-bottom-right-radius: 130px 30px;
+				 
+			}
+			
+			.img1{
+				left: 450px;
+				top: 150px;
+				transform: rotate(20deg);
+			}
+				.img2{
+				left:550px;
+				top: 100px;
+				transform: rotate(70deg);
+			}
+			
+				.img3{
+				left:750px;
+				top: 200px;
+				transform: rotate(-20deg);
+			}
+			.img4{
+				left:800px;
+				top: 250px;
+				transform: rotate(-40deg);
+			}
+			.img5{
+				left:800px;
+				top: 350px;
+				transform: rotate(-60deg);
+			}
+			.img6{
+				left:750px;
+				top: 450px;
+				transform: rotate(-800deg);
+			}
+			.img7{
+				left:450px;
+				top: 400px;
+				transform: rotate(-90deg);
+			}
+				.img8{
+				left:300px;
+				top: 300px;
+				transform: rotate(-130deg);
+			}
+				.img9{
+				left:333px;
+				top: 200px;
+				transform: rotate(-120deg);
+			}
+			
+			
+		</style>
+		
+	</head>
+	<body>
+		<div class="wraper">
+			<img src="1.jpg" class="img1" />
+			<img src="2.jpg" class="img2" />
+			<img src="3.jpg" class="img3" />
+			<img src="4.jpg" class="img4" />
+			<img src="5.jpg" class="img5" />
+			<img src="6.jpg" class="img6" />
+			<img src="7.jpg" class="img7" />
+			<img src="8.jpg" class="img8" />
+			<img src="9.jpg" class="img9" />
+		</div>
+	</body>
+</html>

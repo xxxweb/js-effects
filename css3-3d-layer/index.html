@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+				border: 0;
+			}
+			
+			ul {
+				margin: 0 auto;
+				width: 400px;
+			}
+			
+			li {
+				perspective: 400px;
+				/*transform-style: preserve-3d;*/
+				list-style: none;
+				width: 100px;
+				height: 100px;
+				margin-left: 10px;
+				margin-top: 10px;
+				float: left;
+				box-sizing: border-box;
+				background: gray;
+			}
+			
+			.info {
+				transform-style: preserve-3d;
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 100px;
+				height: 0px;
+				background: rgba(26, 188, 156, 0.9);
+			}
+			
+			.inleft {
+				height: 100px;
+				transform-origin: left;
+				animation: in-left 800ms forwards linear;
+			}
+			
+			.intop {
+				height: 100px;
+				transform-origin: top;
+				animation: in-top 800ms forwards linear;
+			}
+			
+			.inright {
+				height: 100px;
+				transform-origin: right;
+				animation: in-right 800ms forwards linear;
+			}
+			
+			.inbottom {
+				height: 100px;
+				transform-origin: bottom;
+				animation: in-bottom 800ms forwards linear;
+			}
+			
+			@keyframes in-bottom {
+				from {
+					transform: rotateX(90deg);
+				}
+				to {
+					transform: rotateX(0deg);
+				}
+			}
+			
+			@keyframes in-right {
+				from {
+					transform: rotateY(-90deg);
+				}
+				to {
+					transform: rotateY(0deg);
+				}
+			}
+			
+			@keyframes in-top {
+				from {
+					transform: rotateX(-90deg);
+				}
+				to {
+					transform: rotateX(0deg);
+				}
+			}
+			
+			@keyframes in-left {
+				from {
+					transform: rotateY(90deg);
+				}
+				to {
+					transform: rotateY(0deg);
+				}
+			}
+			
+			.toleft {
+				height: 100px;
+				transform-origin: left;
+				animation: to-left 1600ms ease forwards;
+			}
+			
+			.toright {
+				height: 100px;
+				transform-origin: right;
+				animation: to-right 1600ms ease forwards;
+			}
+			
+			@keyframes to-right {
+				0% {
+					transform: rotateY(0);
+				}
+				49% {
+					height: 100px;
+					transform: rotateY(-90deg);
+				}
+				50% {
+					height: 0;
+				}
+				100% {
+					height: 0;
+					transform: rotateY(0deg);
+				}
+			}
+			
+			.totop {
+				height: 100px;
+				transform-origin: top;
+				animation: to-top 1600ms ease forwards;
+			}
+			
+			.tobottom {
+				height: 100px;
+				transform-origin: bottom;
+				animation: to-bottom 1600ms ease forwards;
+			}
+			
+			@keyframes to-bottom {
+				0% {
+					transform: rotateX(0);
+				}
+				49% {
+					height: 100px;
+					transform: rotateX(90deg);
+				}
+				50% {
+					height: 0;
+				}
+				100% {
+					height: 0;
+					transform: rotateX(0deg);
+				}
+			}
+			
+			@keyframes to-top {
+				0% {
+					transform: rotateX(0);
+				}
+				49% {
+					height: 100px;
+					transform: rotateX(-90deg);
+				}
+				50% {
+					height: 0;
+				}
+				100% {
+					height: 0;
+					transform: rotateX(0deg);
+				}
+			}
+			
+			@keyframes to-left {
+				0% {
+					transform: rotateY(0);
+				}
+				49% {
+					height: 100px;
+					transform: rotateY(90deg);
+				}
+				50% {
+					height: 0;
+				}
+				100% {
+					height: 0;
+					transform: rotateY(0deg);
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<ul>
+			<li>
+				<div class="info"></div>
+			</li>
+			<li>
+				<div class="info"></div>
+			</li>
+			<li>
+				<div class="info"></div>
+			</li>
+
+			<li>
+				<div class="info"></div>
+			</li>
+			<li>
+				<div class="info"></div>
+			</li>
+
+			<li>
+				<div class="info"></div>
+			</li>
+
+			<li>
+				<div class="info"></div>
+			</li>
+
+			<li>
+				<div class="info"></div>
+			</li>
+
+			<li>
+				<div class="info"></div>
+			</li>
+		</ul>
+
+		<script>
+			var lis = document.getElementsByTagName('li');
+
+			for(var i = 0; i < lis.length; i++) {
+				lis[i].onmouseout = function() {
+					var mythis = this;
+					var ev = event;
+					addClass('to', mythis, ev);
+
+				}
+
+				lis[i].onmouseover = function() {
+					var mythis = this;
+					var ev = event;
+					addClass('in', mythis, ev);
+				}
+			}
+
+			function getDirect(obj, ev) {
+
+				var w = obj.clientWidth;
+				var h = obj.clientHeight;
+				var objLeft = obj.offsetLeft;
+				var objTop = obj.offsetTop;
+				var eX = ev.pageX;
+				var eY = ev.pageY;
+
+				var direct = '';
+
+				if(eX < objLeft + 10) {
+					if(eX > objLeft - 10) {
+
+						direct = 'left';
+					}
+				}
+
+				if(eX < (objLeft + w + 10)) {
+					if(eX > (objLeft + w - 10)) {
+						//                       right
+						direct = 'right';
+					}
+				}
+
+				if(eY < objTop + 10) {
+					if(eY > objTop - 10) {
+						//							top
+						direct = 'top';
+					}
+				}
+
+				if(eY < (objTop + h + 10)) {
+					if(eY > (objTop + h - 10)) {
+						//							bottom
+						direct = 'bottom';
+					}
+				}
+				return direct;
+
+			}
+
+			function addClass(inOut, obj, ev) {
+				var info = obj.getElementsByTagName('div')[0];
+
+				var dir = getDirect(obj, ev);
+
+				var strClass = inOut + '' + dir + ' info';
+				info.className = strClass;
+			}
+		</script>
+
+	</body>
+
+</html>
