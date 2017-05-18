@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var msg ='$欢迎光临本站$';
+			var len = msg.length;
+			var twoMsg = msg + msg;
+			
+			var position = 0;
+			
+			function setTitle(){
+				
+				var titleMsg = twoMsg.substring(position,position+len);
+				console.log(titleMsg);
+				document.title=titleMsg;
+				position++;
+				if(position > len){
+					position=0;
+				}
+				
+			}
+			setInterval(setTitle,1000);
+		
+		</script>
+	</body>
+</html>
