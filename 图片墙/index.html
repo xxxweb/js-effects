@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.box {
+			
+				/*position: relative;*/
+				margin: 10px auto;
+				width: 660px;
+			}
+			
+			.box li {
+				
+				width: 200px;
+				height: 200px;
+				list-style: none;
+				float: left;
+			/*	margin: 10px 0 0 10px;*/
+                 margin: 10px;
+                 z-index: 1;
+ 			}
+			.box li img{
+				width: 200px;
+				height: 200px;
+			}
+			#text {
+				position: absolute;
+				width: 100px;
+				height: 100px;
+				background: red;
+				left: 380px;
+				top: 10px;
+			}
+		</style>
+	</head>
+
+	<body>
+			<ul class="box">
+			<li><img src="../aa图片/s-banner1.jpg" alt="" /></li>
+			<li><img src="../aa图片/s-banner2.jpg" alt="" /></li>
+			<li><img src="../aa图片/s-banner3.jpg" alt="" /></li>
+			<li><img src="../aa图片/s-banner4.jpg" alt="" /></li>
+			<li><img src="../aa图片/s-banner5.jpg" alt="" /></li>
+			<li><img src="../aa图片/li1.jpg" alt="" /></li>
+			<li><img src="../aa图片/li2.jpg" alt="" /></li>
+			<li><img src="../aa图片/li3.jpg" alt="" /></li>
+			<li><img src="../aa图片/li4.jpg" alt="" /></li>
+		</ul>
+	</body>
+	<script>
+		var arr = [];
+		var box = document.getElementsByClassName("box")[0];
+
+		var imgs = box.getElementsByTagName("li");
+		initData();
+
+		function initData() {
+			for(var i = 0; i < imgs.length; i++) {
+				arr[i] = {
+					left: "" + imgs[i].offsetLeft,
+					top: "" + (imgs[i].offsetTop-10),
+					right: imgs[i].offsetLeft + imgs[i].offsetWidth,
+					bottom: (imgs[i].offsetTop-10) + imgs[i].offsetHeight
+				};
+			}
+			
+			for(var i = 0; i < imgs.length; i++) {
+
+				imgs[i].style.position = "absolute";
+				imgs[i].style.left = arr[i].left + "px";
+				imgs[i].style.top = arr[i].top + "px";
+				imgs[i].style.zIndex = 1;
+			}
+			
+			
+			
+//			console.log(imgs[0].offsetTop);
+//			console.log(arr[0].top);
+//			console.log(imgs[0].style.top);
+		
+		}
+
+		drag();
+
+		function drag() {
+
+			for(var i = 0; i < imgs.length; i++) {
+				imgs[i].index = i;
+				bindDrag(imgs[i]);
+			}
+		}
+		var zIndex = 1;
+
+		function bindDrag(obj) {
+
+			var disX = 0;
+			var disY = 0;
+			var minIndex = 0;
+
+			obj.onmousedown = function(e) {
+
+				disX = event.clientX - arr[obj.index].left;
+				disY = event.clientY - arr[obj.index].top;
+
+				obj.style.zIndex = ++zIndex;
+
+				document.onmousemove = function() {
+					obj.style.left = (event.clientX - disX) + "px";
+					obj.style.top = (event.clientY - disY) + "px";
+
+					minIndex = nearBy(obj);
+					for(var i = 0; i < imgs.length; i++) {
+						imgs[i].style.border = "";
+					}
+					imgs[minIndex].style.border = "1px solid red";
+					
+				};
+				document.onmouseup = function() {
+					document.onmouseup=null;
+					document.onmousemove =null;
+					obj.style.left = arr[minIndex].left + "px";
+					obj.style.top = arr[minIndex].top + "px";
+	           
+                       run(imgs[minIndex],arr[obj.index]);
+                   
+                      ++zIndex;
+                     
+                       imgs[minIndex].style.zIndex=zIndex;
+                         console.log("index "+imgs[obj.index].style.zIndex);
+//					imgs[minIndex].style.left = arr[obj.index].left + "px";
+//					imgs[minIndex].style.top = arr[obj.index].top + "px";
+					imgs[minIndex].style.border = "";
+
+					var middle = arr[obj.index];
+					arr[obj.index] = arr[minIndex];
+					arr[minIndex] = middle;
+					for(var j = 0; j < imgs.length; j++) {
+						imgs[j].index = j;
+					}
+	
+				};
+              return false;
+			};
+
+		}
+
+		function nearBy(obj) {
+			var min = 100000000000000000000000000000000000000000000000000;
+			var minIndex = 0;
+			for(var nearIndex = 0; nearIndex < arr.length; nearIndex++) {
+
+				if(obj.index != nearIndex) {
+					var disLeft = arr[nearIndex].left - parseInt(obj.style.left);
+					var disTop = arr[nearIndex].top - parseInt(obj.style.top);
+					var dis = Math.pow(Math.pow(disLeft, 2) + Math.pow(disTop, 2), 0.5);
+					if(min > dis) {
+						min = dis;
+						minIndex = nearIndex;
+					}
+				}
+			}
+			return minIndex;
+		}
+		
+		
+		function run (obj,tar) {
+			  
+        var speedX=0;
+        var speedY=0;
+       
+         var timer=setInterval(move,100);
+      
+
+        function move() {
+            speedX+=(tar.left-parseInt(obj.style.left))/6;
+            speedX=speedX*0.65;
+            
+       
+            speedY+=(tar.top-parseInt(obj.style.top))/6;
+            speedY=speedY*0.65;
+
+            if(((Math.abs(speedX)<11)&&(Math.abs(tar.left-parseInt(obj.style.left))<11))&&((Math.abs(speedY)<11)&&(Math.abs(tar.top-parseInt(obj.style.top))<11))){
+               clearInterval(timer);
+               timer=null;
+                obj.style.left=tar.left+"px";
+                 obj.style.top=tar.top+"px";
+             
+            }
+            else{
+                obj.style.left=(parseInt(obj.style.left)+speedX)+"px";
+                obj.style.top=(parseInt(obj.style.top)+speedY)+"px";
+            }
+        }
+            
+        }
+	</script>
+
+</html>

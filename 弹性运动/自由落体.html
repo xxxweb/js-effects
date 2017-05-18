@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #box{
+            height: 100px;
+            width: 100px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 20px;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+
+            var height=document.documentElement.clientHeight;
+            document.body.style.height=height+"px";
+
+            var btn=document.getElementById("btn");
+            var box=document.getElementById("box");
+            btn.onclick=function () {
+
+                run(box);
+
+            };
+
+            function run(obj) {
+                var H=document.documentElement.clientHeight;
+                clearInterval(timer);
+                var timer=setInterval(move,50);
+                var YSpeed=0;
+                var XSpeed=30;
+                function move() {
+                    YSpeed+=3;
+                    XSpeed+=10;
+                    if(H-obj.offsetTop-obj.offsetHeight<0){
+                        YSpeed*=-1;
+                        YSpeed*=0.60;
+                    }
+
+                    obj.style.top=(obj.offsetTop+YSpeed)+"px";
+                    obj.style.left=XSpeed+"px";
+                    if(Math.abs(YSpeed)<2&&Math.abs((H-(obj.offsetTop+obj.offsetHeight)))<2){
+
+                        obj.style.top=(H-obj.offsetHeight)+"px";
+                      clearInterval(timer);
+                      speed=0;
+                    }
+
+                }
+
+
+            }
+        }
+    </script>
+</head>
+<body>
+<button id="btn">go</button>
+<div id="box"></div>
+</body>
+</html>

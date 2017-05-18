@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ball_box{
+            perspective: 3000px;
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+        }
+        .ball{
+
+            animation: myRotateY 10s linear infinite;
+            transform: rotateZ(-30deg);
+            transform-style: preserve-3d;
+            height: 500px;
+            width: 1px;
+            background: #0f0e0f;
+            position: relative;
+
+        }
+        .ball_box .ball div{
+
+            position: absolute;
+            left: -150px;
+            top: 100px;
+            height: 300px;
+            width: 300px;
+            border: 1px solid #0c040c;
+            border-radius: 50%;
+        }
+        .line1{
+              transform: rotateY(0);
+          }
+        .line2{
+            transform: rotateY(72deg);
+        }
+        .line3{
+            transform: rotateY(144deg);
+        }
+        .line4{
+            transform: rotateY(216deg);
+        }
+        .line5{
+            transform: rotateY(288deg);
+        }
+        @keyframes myRotateY {
+            0% {transform: rotateZ(-30deg) rotateY(0);}
+            100% { transform: rotateZ(-30deg) rotateY(360deg);}
+        }
+
+    </style>
+</head>
+<body>
+<div class="ball_box">
+    <div class="ball">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4"></div>
+        <div class="line5"></div>
+    </div>
+
+
+</div>
+
+</body>
+</html>

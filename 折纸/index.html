@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+
+            perspective: 800px;
+            transform-style: preserve-3d;
+
+            text-align: center;
+            line-height: 50px;
+            width: 200px;
+            position: relative;
+            margin: 100px auto;
+        }
+        .box h2{
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 10;
+            width: 200px;
+            height: 100px;
+            background: red;
+        }
+        .box span{
+            transition: 2s;
+            width: 200px;
+            display: block;
+            height: 50px;
+            /*background: #0e90d2;*/
+            /*background: #000;*/
+        }
+
+        .box div{
+
+
+            transition: 2s;
+            /*animation: open 2s forwards;*/
+
+            position: absolute;
+            left: 0;
+            top: 52px;
+            width: 200px;
+            transform-style: preserve-3d;
+            transform-origin: top;
+            transform: rotateX(-120deg);
+
+        }
+        .box .first{
+            top: 122px;
+        }
+        .box .show{
+
+        }
+        button{
+
+        }
+        @keyframes open {
+            0% {
+                transform: rotateX(-90deg);
+            }
+           25%{
+                transform: rotateX(-65deg);
+            }
+          50%{
+                transform: rotateX(-40deg);
+            }
+            75%{
+                transform: rotateX(-15deg);
+            }
+           80%{
+                transform: rotateX(10deg);
+            }
+            90%{
+                transform: rotateX(-5deg);
+            }
+
+            100%{
+                transform: rotateX(0deg);
+            }
+        }
+        @keyframes close {
+            0% {
+                transform: rotateX(0deg);
+            }
+            25%{
+                transform: rotateX(-20deg);
+            }
+            50%{
+                transform: rotateX(-45deg);
+            }
+            75%{
+                transform: rotateX(-70deg);
+            }
+
+            100%{
+                transform: rotateX(-90deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<button id="btn"
+>go</button>
+
+<div class="box" >
+    <h2>标题</h2>
+    <div class="first">
+        <span style="background-image:url('wang.jpg');
+        background-repeat:no-repeat;
+        background-position:0 0;
+        background-size: 200px 250px;
+        "></span>
+        <div>
+            <span style="background-image:url('wang.jpg');
+        background-repeat:no-repeat;
+        background-position:0 -50px;
+        background-size: 200px 250px;
+        "></span>
+            <div>
+                <span style="background-image:url('wang.jpg');
+        background-repeat:no-repeat;
+        background-position:0 -100px;
+        background-size: 200px 250px;
+        "></span>
+                <div>
+                    <span style="background-image:url('wang.jpg');
+        background-repeat:no-repeat;
+        background-position:0 -150px;
+        background-size: 200px 250px;
+        "></span>
+                    <div>
+                        <span style="background-image:url('wang.jpg');
+        background-repeat:no-repeat;
+        background-position:0 -200px;
+        background-size: 200px 250px;
+        "></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    var box =document.getElementsByClassName("box")[0];
+    var divs=box.getElementsByTagName("div");
+
+    var run=null;
+
+    function open() {
+        var i=0;
+        if(run!=null){
+            return;
+
+        }
+        run=setInterval(function () {
+            divs[i].style.animation="open 1s forwards";
+
+            var s=divs[i].getElementsByTagName("span")[0];
+//            s.style.background="#0e90d2";
+            console.log(i);
+            i++;
+            if(i==divs.length){
+                clearInterval(run);
+                run=null;
+            }
+        },100);
+    }
+
+    function close() {
+        if(run!=null){
+            return;
+
+        }
+        var i=divs.length-1;
+        run=setInterval(function () {
+            divs[i].style.animation="close 1s forwards";
+            var s=divs[i].getElementsByTagName("span")[0];
+//            s.style.background="#000";
+
+
+            /*background: #0e90d2;*/
+            i--;
+            if(i<0){
+                clearInterval(run);
+                run=null;
+            }
+        },100);
+    }
+
+    var isOpen=true;
+    var btn=document.getElementById("btn");
+    btn.onclick=function () {
+        if(isOpen){
+            open();
+
+        }else{
+            close();
+        }
+        isOpen=!isOpen;
+
+    }
+</script>
+</body>
+</html>

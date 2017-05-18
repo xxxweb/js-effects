@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			.content {
+				background: #E3E3E3;
+				padding-top: 1px;
+				padding-bottom: 20px;
+			}
+			
+			.content:after {
+				content: "";
+				clear: both;
+				overflow: hidden;
+				display: block;
+			}
+			
+			.content h3 {
+				text-align: center;
+				margin: 10px auto;
+				padding: 10px;
+				border-bottom: 1px solid #0F0F0F;
+			}
+			
+			.content .wrap {
+				height: 120px;
+				float: left;
+				margin-left: 20px;
+				padding-bottom: 15px;
+				text-align: center;
+			}
+			
+			.content .wrap p {
+				padding: 25px;
+			}
+			
+			.content .wrap div {
+				border-radius: 8px;
+				display: inline-block;
+			}
+			
+			.content .wrap .line1 {
+				display: inline-block;
+				width: 15px;
+				height: 16px;
+				background: #4b9cdb;
+			}
+			
+			.content .wrap .loading2 {
+				width: 150px;
+			}
+			
+			.content .wrap .line2 {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: #FF5722;
+			}
+			
+			.content .wrap .loading4 {
+				width: 150px;
+			}
+			
+			.content .wrap .line4 {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: #4b9cdb;
+			}
+			
+			.content .wrap .line5 {
+				display: inline-block;
+				width: 16px;
+				height: 16px;
+				background: #4b9cdb;
+				transform: translateX(-300px);
+				opacity: 0;
+			}
+			
+			.content .wrap .loading5 {
+				width: 600px;
+			}
+			
+			.content .wrap .k-ring-1 {
+				display: inline-block;
+				width: 30px;
+				height: 30px;
+				border-radius: 50%;
+				border: 7px dashed #000000;
+			}
+			
+			.content .wrap .k-ring-2 {
+				display: inline-block;
+				position: relative;
+				width: 40px;
+				height: 40px;
+			}
+			
+			.content .k-ring-2 .ring {
+				width: 34px;
+				height: 34px;
+				border-radius: 50%;
+				border: 3px solid #9C27B0;
+			}
+			
+			.content .k-ring-2 .ball {
+				width: 14px;
+				height: 14px;
+				border-radius: 50%;
+				background: #F44336;
+				position: absolute;
+				left: 12px;
+				top: -5px;
+			}
+			
+			.content .loading6 .yuan {
+				width: 40px;
+				height: 40px;
+				background: #777;
+				border-radius: 50%;
+			}
+			
+			.content .loading6 .banyuan {
+				width: 80px;
+				height: 40px;
+				background: #ee6362;
+				border-radius: 50% / 100% 100% 0 0;
+			}
+			
+			.content .loading6 .bantuoyuan {
+				width: 40px;
+				height: 40px;
+				background: #0000FF;
+				border-radius: 50% / 100% 100% 0 0;
+			}
+			
+			.content .loading6 .xstuoyuan {
+				width: 80px;
+				height: 40px;
+				background: #FFC107;
+				border-radius: 100% 0 0 0;
+			}
+			
+			.content .loading6 .sibianxing {
+				width: 80px;
+				height: 40px;
+				background: #2cb0b2;
+				border-radius: 0;
+				transform: skewX(-45deg);
+			}
+			
+			.content .loading6 .sibianxing div {
+				transform: skewX(45deg);
+				line-height: 40px;
+			}
+			
+			.content .loading6 .lingxing {
+				transform: rotate(45deg);
+				overflow: hidden;
+				border-radius: 0;
+				height: 60px;
+				width: 60px;
+			}
+			
+			.content .loading6 .lingxing img {
+				transform: rotate(-45deg) scale(1.5);
+				height: 60px;
+				width: 60px;
+			}
+			
+			.content .loading6 .sanjiaoxing1 {
+				width: 0;
+				height: 0;
+				border-radius: 0;
+				border-left: 20px solid transparent;
+				border-right: 20px solid transparent;
+				border-bottom: 40px solid #6200EA;
+			}
+			
+			.content .loading6 .sanjiaoxing2 {
+				width: 0;
+				height: 0;
+				border-radius: 0;
+				border-left: 40px solid transparent;
+				border-bottom: 40px solid blue;
+			}
+			
+			.content .loading6 .sanjiaoxing3 {
+				width: 0;
+				height: 0;
+				border-radius: 0;
+				border-top: 40px solid red;
+				border-right: 40px solid transparent;
+			}
+			
+			.content .loading6 .quejiao1 {
+				width: 40px;
+				height: 40px;
+				border-radius: 0;
+				background: #005580;
+				background: linear-gradient(-45deg, transparent 15px, #005580 0);
+			}
+			
+			.content .loading6 .quejiao2 {
+				width: 40px;
+				height: 40px;
+				border-radius: 0;
+				background: #005580;
+				background: linear-gradient(-45deg, transparent 5px, #005580 0) right, linear-gradient(45deg, transparent 5px, #005580 0) left;
+				background-repeat: no-repeat;
+				background-size: 50% 100%;
+			}
+			
+			.content .loading6 .quejiao3 {
+				width: 40px;
+				height: 40px;
+				border-radius: 0;
+				background: #005580;
+				background: linear-gradient(135deg, transparent 5px, #005580 0) top left,
+				linear-gradient(-135deg, transparent 5px, #005580 0) top right,
+				linear-gradient(-45deg, transparent 5px, #005580 0) bottom right,
+				linear-gradient(45deg, transparent 5px, #005580 0) bottom left;
+				background-repeat: no-repeat;
+				background-size: 50% 50%;
+			}
+		</style>
+		<link rel="stylesheet" href="animation.css" />
+	</head>
+
+	<body>
+		<div class="content">
+			<h3>css3小动画</h3>
+
+			<div class="wrap">
+				<div class="loading1">
+					<p>load 1a</p>
+					<div class="line1 k-line1-1"></div>
+					<div class="line1 k-line1-2"></div>
+					<div class="line1 k-line1-3"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading1">
+					<p>load 2a</p>
+					<div class="line1 k-line2-1"></div>
+					<div class="line1 k-line2-2"></div>
+					<div class="line1 k-line2-3"></div>
+					<div class="line1 k-line2-4"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading2">
+					<p>load 2a</p>
+					<div class="line2 k-line3-1"></div>
+					<div class="line2 k-line3-2"></div>
+					<div class="line2 k-line3-3"></div>
+					<div class="line2 k-line3-4"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading4">
+					<p>load 2a</p>
+					<div class="line4 k-line4-1"></div>
+					<div class="line4 k-line4-2"></div>
+					<div class="line4 k-line4-3"></div>
+					<div class="line4 k-line4-4"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading5">
+					<p>load 2a</p>
+					<div class="line5 k-line5-1"></div>
+					<div class="line5 k-line5-2"></div>
+					<div class="line5 k-line5-3"></div>
+					<div class="line5 k-line5-4"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>load 2a</p>
+					<div class="k-ring-1"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>load 2a</p>
+					<div class="k-ring-2">
+						<div class="ring"></div>
+						<div class="ball"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>圆</p>
+					<div class="yuan"></div>
+				</div>
+
+			</div>
+			<div class="wrap">
+				<div class="loading6">
+					<p>半圆</p>
+					<div class="banyuan"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>半椭圆</p>
+					<div class="bantuoyuan"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>1/4 椭圆</p>
+					<div class="xstuoyuan"></div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>平行四边形</p>
+					<div class="sibianxing">
+						<div>xuxinxin</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>菱形</p>
+					<div class="lingxing">
+						<img src="s-banner1.jpg" alt="" />
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>三角形 1</p>
+					<div class="sanjiaoxing1">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>三角形 2</p>
+					<div class="sanjiaoxing2">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>三角形 3</p>
+					<div class="sanjiaoxing3">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>缺角</p>
+					<div class="quejiao1">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>缺角</p>
+					<div class="quejiao2">
+
+					</div>
+				</div>
+			</div>
+
+			<div class="wrap">
+				<div class="loading6">
+					<p>缺角</p>
+					<div class="quejiao3">
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+	</body>
+
+</html>

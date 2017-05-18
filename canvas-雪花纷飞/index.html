@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        #can{
+
+            background-color: #0c040c;
+            display: block;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var can=document.getElementById("can");
+            var ctx=can.getContext("2d");
+           can.style.height=window.innerHeight+"px";
+            can.style.width=window.innerWidth+"px";
+            var h=window.innerHeight;
+            var w=window.innerWidth;
+//             定义雪花数量
+            var num=1000;
+//            存放雪花信息
+            var info=[];
+
+             init();
+
+            draw();
+         setInterval(draw,50);
+            function change() {
+                      for(var i=0;i<num;i++){
+                          info[i].y+=Math.ceil(Math.random()*2+1);
+//                          info[i].x-=Math.ceil(Math.random());
+
+//                          info[i].x<0?Math.ceil(Math.random()*w):info[i].x;
+                          if(info[i].y>=h){
+                              info[i].y=0;
+                          }
+                      }
+            }
+            function init() {
+                //               存放信息
+                for(var i=0;i<num;i++){
+                    info.push({
+                        x:Math.ceil(Math.random()*w),
+                        y:Math.ceil(Math.random()*h),
+                        r:Math.ceil(Math.random()*3+1)
+                    })
+                }
+            }
+           function draw() {
+               ctx.clearRect(0,0,w,h);
+               for(var i=0;i<num;i++) {
+                   console.log(i);
+               ctx.beginPath();
+                   ctx.arc(info[i].x,info[i].y,info[i].r,0,2*Math.PI,false);
+                   ctx.fillStyle="#FEF9FF";
+                   ctx.fill();
+                   ctx.stroke();
+               }
+               change();
+           }
+
+        }
+
+    </script>
+</head>
+<body>
+<canvas id="can" style="width:90px;height: 90px;"></canvas>
+</body>
+</html>

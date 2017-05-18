@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .box{
+            position: relative;
+        }
+        .car{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: red;
+            left: 0;
+            top: 0;
+        }
+        .xian{
+            position: absolute;
+            top: 0;
+            left: 500px;
+            width: 1px;
+            height: 100px;
+            background: #000;
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var car=document.getElementsByClassName('car')[0];
+//            var speed=0;
+//            var timer=setInterval(movess,100);
+//            function movess() {
+//               speed+=(500-car.offsetLeft)/7;
+//                speed=speed*0.75;
+//
+//                if((Math.abs(speed)<1)&&(Math.abs(500-car.offsetLeft)<1)){
+//                    clearInterval(timer);
+//                    car.style.left="500px";
+//                }
+//                else{
+//                    car.style.left=(car.offsetLeft+speed)+"px";
+//                }
+//            }
+
+         run(car,500);
+            function run(obj,tar) {
+                var speed=0;
+                var timer=setInterval(move,100);
+
+                function move() {
+                    speed+=(tar-car.offsetLeft)/10;
+                   speed=speed*0.75;
+
+                if((Math.abs(speed)<1)&&(Math.abs(tar-car.offsetLeft)<1)){
+                    clearInterval(timer);
+                    car.style.left=tar+"px";
+                }
+                else{
+                    car.style.left=(car.offsetLeft+speed)+"px";
+                }
+                }
+
+            }
+
+        }
+    </script>
+</head>
+<body>
+<div class="box">
+    <div class="car"></div>
+    <div class="xian"></div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        ul{
+            width: 1300px;
+        }
+        div{
+            margin: 100px auto;
+            height: 460px;
+
+
+
+        }
+        div li{
+            list-style: none;
+            float: left;
+            width: 100px;
+            height: 460px;
+
+            /*background: url("1.jpg");*/
+
+        }
+
+    </style>
+    <script>
+        window.onload=function () {
+            var divs=document.getElementsByTagName('div');
+            var lis=divs[0].children[0].children;
+
+            for(var i=0;i<lis.length;i++){
+            lis[i].style.backgroundImage='url('+(i+1)+'.jpg)';
+                lis[i].style.index=i;
+
+                lis[i].onmouseout=function () {
+                    for(var i=0;i<lis.length;i++){
+                        myrun(lis[i],100);
+                    }
+                }
+                lis[i].onmouseover=function () {
+//                    for(var i=0;i<lis.length;i++){
+//                        myrun(lis[i],100);
+//                    }
+                    myrun(this,800);
+                }
+            }
+
+            function myrun(obj,target) {
+                   var leader=getStyle(obj,'width');
+                 leader=parseFloat(leader);
+                var timer=null;
+//                    clearInterval(timer);
+                timer=setInterval(run,5);
+                function run() {
+
+                    leader=leader+(target-leader)/2;
+                    console.log(leader+'  leader');
+                    leader=Math.ceil(leader);
+                    if((leader<109)||leader==target){
+                        clearInterval(timer);
+
+                    }
+                    obj.style.width=leader+'px';
+                }
+            }
+            function getStyle(obj,attr) {  //  谁的      那个属性
+                if(obj.currentStyle)  // ie 等
+                {
+                    return obj.currentStyle[attr];  // 返回传递过来的某个属性
+                }
+                else
+                {
+                    return window.getComputedStyle(obj,null)[attr];  // w3c 浏览器
+                }
+            }
+
+        }
+
+    </script>
+</head>
+<body>
+<div>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+</div>
+</body>
+</html>
